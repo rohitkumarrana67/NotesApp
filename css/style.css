@@ -1,0 +1,19 @@
+.side-bar{
+    min-height: 100vh;
+    border:0.5px solid whitesmoke;
+}
+
+.note-tab{
+    border:0.5px solid whitesmoke;
+}
+
+.show-content{
+    min-height: 60vh;
+    background-image: url("../img/back.jpg");
+    background-size: 100% 100%;
+}
+
+.click-note:hover{
+    background-color: darkslategrey;
+    cursor: pointer;
+}

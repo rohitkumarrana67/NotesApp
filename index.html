@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container-fluid px-0">
+        <div class="bg-dark text-white p-2 ">
+            <h1 class="pl-5">QUICK-NOTES</h1>
+        </div>
+    </div>
+    <div class="container-fluid px-0">
+        <div class="row mx-0">
+            <div class="col-3 bg-dark side-bar px-0" id="notes-collection">
+            </div>
+            <div class="col-9" id="play-area"></div>
+        </div>
+    </div>
+
+
+    <script type="text/template" id="notes-template">
+        <div class="p-3 text-center"><button class="btn btn-success" id="new-note"> + New Note</button></div>
+        <div id="notes">
+        </div>
+    </script>
+
+    <script type="text/template" id="notes-tab-template">
+        <div id="click-note" class="text-center text-white note-tab click-note"><h5><%=model.get('title')%></h5></div>
+    </script>
+
+    <script type="text/template" id="show-note-template">
+           <div class="mt-1" >
+               <div class="card">
+                   <div class="card-header">
+                    <h3 class="text-primary"><%= model.get('title')%></h3>
+                   </div>
+                   <div class="card-body show-content">
+                       <%= model.get('content')%>
+                   </div>
+                   <div class="card-footer">
+                       <div class="row">
+                        <div class="col-8"></div>
+                        <div class="col-2"><button class="btn btn-block btn-danger" id="delete">Delete</button></div>
+                        <div class="col-2"><button class="btn btn-block btn-primary" id="edit">Edit</button></div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+    </script>
+
+    <script type="text/template" id="edit-note-template">
+        <div>
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h5 class="text-center text-primary">NEW NOTE</h5>
+                  </div>
+              <div class="card-body">
+                 <div class="form-group">
+                     <label for="tilte">Title:</label>
+                     <input type="text" class="form-control" placeholder="title..." id='title' value="<%= model.get('title')%>">
+                 </div>
+                 <div class="form-group">
+                    <label for="tilte">Content:</label>
+                    <textarea id="summernote" ><%= model.get('content')%></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-10"></div>
+                    <div class="col-2"><button class="btn btn-primary btn-block" id="update">UPDATE</button></div>
+                    
+                </div>
+              </div>
+              <div></div>
+            </div>
+       </div>
+ </script>
+
+    <script type="text/template" id="add-note-template">
+       <div>
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h5 class="text-center text-primary">NEW NOTE</h5>
+                  </div>
+              <div class="card-body">
+                 <div class="form-group">
+                     <label for="tilte">Title:</label>
+                     <input type="text" class="form-control" placeholder="title..." id='title'>
+                 </div>
+                 <div class="form-group">
+                    <label for="tilte">Content:</label>
+                    <textarea id="summernote" ></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-10"></div>
+                    <div class="col-2"><button class="btn btn-primary btn-block" id="add-note">ADD</button></div>
+                    
+                </div>
+              </div>
+              <div></div>
+            </div>
+       </div>
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="js/lib/jquery.js"></script>
+    <script src="js/lib/underscore.js"></script>
+    <script src="js/lib/backbone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="js/models/note_model.js"></script>
+    <script src="js/collections/notes_collection.js"></script>
+    <script src="js/views/edit_note.js"></script>
+    <script src="js/views/show_note.js"></script>
+    <script src="js/views/add_note.js"></script>
+    <script src="js/views/note.js"></script>
+    <script src="js/views/notes.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
